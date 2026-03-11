@@ -44,15 +44,16 @@ Copy the example and fill in your values for the backend:
 cp .env.example backend/.env
 ```
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `PORT` | Backend server port | `4000` |
-| `MONGODB_URI` | MongoDB connection string | *(required)* |
-| `JWT_SECRET` | Secret for JWT token signing | *(required)* |
-| `OPENWEATHER_API_KEY` | OpenWeatherMap API key | *(required)* |
+| Variable                | Description                        | Default                    |
+| ----------------------- | ---------------------------------- | -------------------------- |
+| `PORT`                  | Backend server port                | `4000`                     |
+| `MONGODB_URI`           | MongoDB connection string          | _(required)_               |
+| `JWT_SECRET`            | Secret for JWT token signing       | _(required)_               |
+| `OPENWEATHER_API_KEY`   | OpenWeatherMap API key             | _(required)_               |
 | `ALERT_EVALUATION_CRON` | Cron schedule for alert evaluation | `* * * * *` (every minute) |
 
 Notes:
+
 - `ALERT_EVALUATION_CRON` controls how often the alert rules engine runs. In dev it is set to once per minute for faster feedback.
 - Individual alert rules have their own **cooldownMinutes**, with a **minimum of 5 minutes** enforced at the API level to avoid notification spam.
 
@@ -358,8 +359,6 @@ Protect-Plus/
 │       ├── shared/                 # Shared atoms, molecules, organisms
 │       ├── providers/              # QueryProvider, ToastProvider
 │       └── lib/                    # API client, query client
-├── PLAN.md                         # Architectural plan
-├── TODO.md                         # Granular implementation checklist
 └── AI-ASSIST-LOG.md                # AI usage log
 ```
 
