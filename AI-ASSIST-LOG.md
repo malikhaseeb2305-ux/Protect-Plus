@@ -78,24 +78,3 @@ This document records significant AI-assisted interactions during the developmen
 Also fixed `node-cron` import — AI used `import cron from 'node-cron'` (default import) but the package only exports named members. Changed to `import { schedule, ScheduledTask } from 'node-cron'`.
 
 **Outcome:** Modified significantly — multiple AI-generated type assumptions were incorrect
-
----
-
-## Entry 8 — Accessibility and Keyboard Navigation for Dropdowns
-
-**Tool used:** Claude (Sonnet 4) via Cursor
-**Prompt/task:** "Add accessibility features to the notification bell dropdown and user menu — including ARIA attributes, keyboard navigation, and focus management."
-**What it generated:** Basic `aria-label` attributes on buttons and a simple `onClick` toggle for dropdowns. No keyboard handling, no click-outside dismissal, no `aria-expanded`, no role attributes.
-**What you changed and why:** Added comprehensive accessibility:
-- `aria-expanded` on toggle buttons so screen readers announce dropdown state
-- `aria-haspopup="true"` on the user menu button
-- `role="menu"` on dropdown containers and `role="menuitem"` on items
-- Escape key handler to close dropdowns (via `useEffect` with `keydown` listener)
-- Click-outside handler using `useRef` and `mousedown` event detection
-- `role="alert"` on error messages for immediate screen reader announcement
-- `role="status"` on success feedback for polite announcements
-- `.sr-only` CSS utility class for screen-reader-only content (like "notifications" label)
-
-The AI's initial output would have been functionally correct but failed WCAG 2.1 compliance for keyboard operability (2.1.1) and name/role/value (4.1.2).
-
-**Outcome:** Modified significantly

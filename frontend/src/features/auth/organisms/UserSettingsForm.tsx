@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import Card from '@/shared/ui/atoms/Card';
 import Button from '@/shared/ui/atoms/Button';
 import { extractApiError } from '@/shared/lib/extractApiError';
+import { useToast } from '@/providers/ToastProvider';
 
 import { useCurrentUser } from '../hooks/useCurrentUser';
 import { useUpdateSettings } from '../hooks/useUpdateSettings';
@@ -17,6 +18,7 @@ export default function UserSettingsForm() {
   const updateSettings = useUpdateSettings();
   const [unit, setUnit] = useState<TempUnit>('C');
   const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+  const { showToast } = useToast();
 
   useEffect(() => {
     if (user?.preferences.temperatureUnit) {
@@ -29,8 +31,15 @@ export default function UserSettingsForm() {
     updateSettings.mutate(
       { temperatureUnit: unit },
       {
-        onSuccess: () => setFeedback({ type: 'success', message: 'Settings saved.' }),
-        onError: (err) => setFeedback({ type: 'error', message: extractApiError(err) }),
+        onSuccess: () => {
+          setFeedback({ type: 'success', message: 'Settings saved.' });
+          showToast('Settings saved', 'success');
+        },
+        onError: (err) => {
+          const message = extractApiError(err);
+          setFeedback({ type: 'error', message });
+          showToast(message, 'error');
+        },
       },
     );
   }

@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import Button from '@/shared/ui/atoms/Button';
 import { extractApiError } from '@/shared/lib/extractApiError';
+import { useToast } from '@/providers/ToastProvider';
 
 import AuthFormFields from '../molecules/AuthFormFields';
 import { useLogin } from '../hooks/useLogin';
@@ -15,6 +16,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState('');
   const [fieldErrors, setFieldErrors] = useState<{ email?: string; password?: string }>({});
   const login = useLogin();
+  const { showToast } = useToast();
 
   function validate(): boolean {
     const errs: typeof fieldErrors = {};
@@ -34,7 +36,12 @@ export default function LoginForm() {
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (!validate()) return;
-    login.mutate({ email: email.trim(), password });
+    login.mutate({ email: email.trim(), password }, {
+      onError: (err) => {
+        const message = extractApiError(err);
+        showToast(message, 'error');
+      },
+    });
   }
 
   return (
@@ -46,12 +53,6 @@ export default function LoginForm() {
         onPasswordChange={setPassword}
         errors={fieldErrors}
       />
-
-      {login.error && (
-        <p className={styles.serverError} role="alert">
-          {extractApiError(login.error)}
-        </p>
-      )}
 
       <Button type="submit" loading={login.isPending}>
         Sign in

@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import Button from '@/shared/ui/atoms/Button';
 import { extractApiError } from '@/shared/lib/extractApiError';
+import { useToast } from '@/providers/ToastProvider';
 
 import AuthFormFields from '../molecules/AuthFormFields';
 import { useRegister } from '../hooks/useRegister';
@@ -16,6 +17,7 @@ export default function RegisterForm() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [fieldErrors, setFieldErrors] = useState<{ email?: string; password?: string }>({});
   const register = useRegister();
+  const { showToast } = useToast();
 
   function validate(): boolean {
     const errs: typeof fieldErrors = {};
@@ -37,7 +39,12 @@ export default function RegisterForm() {
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (!validate()) return;
-    register.mutate({ email: email.trim(), password });
+    register.mutate({ email: email.trim(), password }, {
+      onError: (err) => {
+        const message = extractApiError(err);
+        showToast(message, 'error');
+      },
+    });
   }
 
   return (
@@ -52,12 +59,6 @@ export default function RegisterForm() {
         confirmPassword={confirmPassword}
         onConfirmPasswordChange={setConfirmPassword}
       />
-
-      {register.error && (
-        <p className={styles.serverError} role="alert">
-          {extractApiError(register.error)}
-        </p>
-      )}
 
       <Button type="submit" loading={register.isPending}>
         Create account
