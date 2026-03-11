@@ -7,7 +7,10 @@ dist/
 out/
 
 # Environment
-.env
+# NOTE: These values are committed ONLY for assessment convenience.
+# In real projects, .env files with secrets must NEVER be committed.
+# See README for proper environment handling guidelines.
+# .env
 .env.local
 .env.*.local
 
