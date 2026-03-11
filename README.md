@@ -369,7 +369,29 @@ Protect-Plus/
 1. **Location search autocomplete** — Integrate OpenWeatherMap's geocoding API for a search-as-you-type experience instead of manual lat/lon entry.
 2. **Drag-and-drop reordering** — The backend supports `sortOrder` and reorder endpoints; the frontend could expose a drag-and-drop UI.
 3. **E2E tests** — Cypress or Playwright tests for critical user flows (register → add location → create rule → verify alert).
-4. **Rate limiting middleware** — Express rate limiter on auth endpoints and rule creation to prevent abuse.
-5. **Docker Compose** — Single-command setup with backend, frontend, and MongoDB containers.
-6. **Manual dark mode toggle** — CSS custom properties are already dark-mode-ready via `prefers-color-scheme`; a user-facing toggle would improve UX.
-7. **Monitoring and observability** — Extend structured logging with request tracing, metrics (Prometheus), and health dashboards.
+4. **Docker Compose** — Single-command setup with backend, frontend, and MongoDB containers.
+5. **Manual dark mode toggle** — CSS custom properties are already dark-mode-ready via `prefers-color-scheme`; a user-facing toggle would improve UX.
+6. **Metrics and dashboards** — Add metrics (e.g. Prometheus) and dashboards on top of the existing structured logging + tracing.
+
+---
+
+## AI Assistance & `AI-ASSIST-LOG.md`
+
+This project was built with deliberate AI assistance. As required in the assignment:
+
+- All significant AI interactions are documented in `AI-ASSIST-LOG.md` at the repository root.
+- The log includes **7 entries** covering:
+  - Data modeling and schema design for alert rules, weather snapshots, and notifications.
+  - Backend modular architecture and middleware (error handling, logging, scheduler).
+  - Alert evaluation logic and cooldown implementation.
+  - Weather caching and freshness strategy.
+  - Frontend component structure (atomic design + feature modules).
+  - React Query integration and cache invalidation patterns.
+  - Debugging TypeScript issues in Recharts and Zod integration.
+- For each entry, the log describes:
+  - **Prompt/task** — what I asked the AI to do.
+  - **What it generated** — a short summary of the suggestion.
+  - **What I changed and why** — where I overrode or refined AI output based on my own judgment.
+  - **Outcome** — whether the AI output was accepted, significantly modified, or rejected.
+
+This demonstrates that AI was used as a tool for exploration and acceleration, while final design and implementation decisions were made with clear reasoning and critical evaluation, in line with the expectations outlined in the assignment brief.
