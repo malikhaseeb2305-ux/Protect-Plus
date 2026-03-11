@@ -1,0 +1,16 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.desc {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  text-transform: capitalize;
+}
+
+.loading {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}

@@ -1,0 +1,20 @@
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-size: 0.75rem;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.high {
+  background: rgba(220, 38, 38, 0.1);
+  color: var(--color-danger);
+}
+
+.low {
+  background: rgba(2, 132, 199, 0.1);
+  color: var(--color-info);
+}

@@ -1,7 +1,15 @@
 import { Router } from 'express';
 
+import { authMiddleware } from '../../../shared/middlewares';
+import { asyncHandler } from '../../../shared/utils/asyncHandler';
+
+import { authController } from './authController';
+
 const router = Router();
 
-// Phase 3: POST /register, POST /login, POST /logout, GET /me
+router.post('/register', asyncHandler(authController.register));
+router.post('/login', asyncHandler(authController.login));
+router.post('/logout', asyncHandler(authController.logout));
+router.get('/me', authMiddleware, asyncHandler(authController.me));
 
 export default router;

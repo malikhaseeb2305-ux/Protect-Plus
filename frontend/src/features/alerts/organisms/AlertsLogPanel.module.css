@@ -1,0 +1,98 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.refreshButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-full);
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+}
+
+.refreshButton:hover {
+  background: var(--color-surface-subtle);
+  color: var(--color-text);
+  transform: rotate(-8deg);
+}
+
+.refreshButton:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.refreshButtonSpinning svg {
+  animation: alerts-refresh-spin 0.6s linear infinite;
+}
+
+@keyframes alerts-refresh-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.listCard {
+  padding: var(--space-xs);
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-lg) 0;
+}
+
+.error {
+  font-size: 0.875rem;
+  color: var(--color-danger);
+}
+
+.empty {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.pageInfo {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}

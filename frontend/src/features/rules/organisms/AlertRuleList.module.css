@@ -1,0 +1,32 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-lg) 0;
+}
+
+.error {
+  font-size: 0.875rem;
+  color: var(--color-danger);
+}
+
+.empty {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}

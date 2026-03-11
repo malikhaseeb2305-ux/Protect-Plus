@@ -1,5 +1,9 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+
+import QueryProvider from '@/providers/QueryProvider';
+import ToastProvider from '@/providers/ToastProvider';
+
 import './globals.css';
 
 const geistSans = Geist({
@@ -14,7 +18,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Weather Intelligence Dashboard',
-  description: 'Monitor weather conditions, configure alerts, and track forecasts across multiple locations.',
+  description:
+    'Monitor weather conditions, configure alerts, and track forecasts across multiple locations.',
 };
 
 export default function RootLayout({
@@ -25,7 +30,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+        <QueryProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </QueryProvider>
       </body>
     </html>
   );

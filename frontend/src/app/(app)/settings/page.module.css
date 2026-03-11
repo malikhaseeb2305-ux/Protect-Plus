@@ -1,0 +1,9 @@
+.page {
+  max-width: 600px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: var(--space-xl);
+}

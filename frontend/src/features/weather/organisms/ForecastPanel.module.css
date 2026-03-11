@@ -1,0 +1,22 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.heading {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.row {
+  display: flex;
+  gap: var(--space-sm);
+  overflow-x: auto;
+  padding-bottom: var(--space-xs);
+}
+
+.empty {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
