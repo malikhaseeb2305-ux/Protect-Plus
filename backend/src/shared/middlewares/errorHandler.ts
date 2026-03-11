@@ -4,8 +4,16 @@ import { AppError } from '../errors';
 import { ValidationError } from '../errors/ValidationError';
 import { logger } from '../logger';
 
-export function errorHandler(err: Error, _req: Request, res: Response, _next: NextFunction): void {
+export function errorHandler(err: Error, req: Request, res: Response, _next: NextFunction): void {
   if (err instanceof ValidationError) {
+    logger.warn('Validation error', {
+      requestId: req.requestId,
+      path: req.originalUrl,
+      method: req.method,
+      userId: req.user?.userId,
+      fields: err.fields,
+    });
+
     res.status(err.statusCode).json({
       status: 'error',
       message: err.message,
@@ -15,6 +23,15 @@ export function errorHandler(err: Error, _req: Request, res: Response, _next: Ne
   }
 
   if (err instanceof AppError) {
+    logger.warn('Handled application error', {
+      requestId: req.requestId,
+      path: req.originalUrl,
+      method: req.method,
+      userId: req.user?.userId,
+      error: err.message,
+      statusCode: err.statusCode,
+    });
+
     res.status(err.statusCode).json({
       status: 'error',
       message: err.message,
@@ -23,6 +40,10 @@ export function errorHandler(err: Error, _req: Request, res: Response, _next: Ne
   }
 
   logger.error('Unhandled error', {
+    requestId: req.requestId,
+    path: req.originalUrl,
+    method: req.method,
+    userId: req.user?.userId,
     message: err.message,
     stack: err.stack,
   });
@@ -32,3 +53,4 @@ export function errorHandler(err: Error, _req: Request, res: Response, _next: Ne
     message: 'Internal server error',
   });
 }
+
